@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Turbine Dashboard</title>
+  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #1e1e1e; color: white; text-align: center; }
+    .card { display: inline-block; background: #333; padding: 20px; margin: 10px; border-radius: 10px; min-width: 150px; }
+    h2 { margin-bottom: 10px; }
+    span.value { font-size: 2em; color: #4cafef; }
+  </style>
+</head>
+<body>
+  <h1>Turbine SCADA Dashboard</h1>
+  <div class="card"><h2>Yaw</h2><span class="value" id="yawValue">--</span>°</div>
+  <div class="card"><h2>Voltage</h2><span class="value" id="voltValue">--</span> V</div>
+  <div class="card"><h2>Current</h2><span class="value" id="ampValue">--</span> A</div>
+  <div class="card"><h2>RPM</h2><span class="value" id="rpmValue">--</span></div>
+  <div class="card"><h2>Wind Speed</h2><span class="value" id="windSpeedValue">--</span> m/s</div>
+  <div class="card"><h2>Wind Dir</h2><span class="value" id="windDirValue">--</span>°</div>
+
+  <script>
+    const socket = io();
+    socket.on('telemetry', data => {
+      document.getElementById("yawValue").innerText = data.yaw;
+      document.getElementById("voltValue").innerText = data.voltage;
+      document.getElementById("ampValue").innerText = data.current;
+      document.getElementById("rpmValue").innerText = data.rpm;
+      document.getElementById("windSpeedValue").innerText = data.windSpeed;
+      document.getElementById("windDirValue").innerText = data.windDir;
+    });
+  </script>
+</body>
+</html>

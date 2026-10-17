@@ -1,0 +1,19 @@
+# Secrets and local settings
+.env
+esp_with_scada/secrets.h
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Arduino / editors
+build/
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
